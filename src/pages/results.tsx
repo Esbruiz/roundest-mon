@@ -1,18 +1,18 @@
-import { RouterOutputs, trpc } from "../utils/trpc";
+import type { RouterOutputs} from "../utils/trpc";
+import { trpc } from "../utils/trpc";
 import Head from "next/head";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type ResultsFromServer = RouterOutputs["roundest"]["getResults"];
-
-export const revalidate = 10;
 
 const aggreatePercentage = (pokemon: ResultsFromServer[number]) => {
   const { VoteFor, VoteAgainst } = pokemon._count;
   if(VoteFor === 0 && VoteAgainst === 0) {
     return 0;
   }
-  return VoteFor / (VoteFor + VoteAgainst) * 100;
+  return Math.round(VoteFor / (VoteFor + VoteAgainst) * 100);
 }
 
 const ResultsPage = () => {
@@ -44,12 +44,12 @@ const ResultsPage = () => {
             </tr>
             </thead>
             <tbody>
-            {pokemons.data?.map((pokemon, index) => (
+            {pokemons.data?.map((pokemon) => (
               <tr
                 key={pokemon.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" className="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
-                  <img className="w-10 h-10 rounded-full" src={`/sprites/${pokemon.id}.png`} alt={pokemon.name} />
+                  <Image className="rounded-full" src={`/sprites/${pokemon.id}.png`} alt={pokemon.name} width={64} height={64} />
                   <div className="pl-3">
                     <div className="text-base font-semibold capitalize">{pokemon.name}</div>
                   </div>
