@@ -13,7 +13,7 @@ export const roundestRouter = router({
       });
       if(ourPokemon) return ourPokemon;
         const pokemon =  await PokeAPI.Pokemon.resolve(input.id);
-        prisma.pokemon.create({
+        await prisma.pokemon.create({
           data: {
             id: pokemon.id,
             name: pokemon.name,

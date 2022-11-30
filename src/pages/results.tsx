@@ -1,6 +1,7 @@
 import { RouterOutputs, trpc } from "../utils/trpc";
 import Head from "next/head";
 import React from "react";
+import Link from "next/link";
 
 type ResultsFromServer = RouterOutputs["roundest"]["getResults"];
 
@@ -29,7 +30,8 @@ const ResultsPage = () => {
             These are the <span className="text-[hsl(280,100%,70%)]">Roundest</span> Pokemons
           </h1>
         </div>
-        <div className={"flex flex-row justify-around pt-16"}>
+          <Link className="text-center pb-12 pt-12 font-medium text-[hsl(280,100%,70%)] hover:underline" href={"/"}>Go and vote!</Link>
+        <div className={"flex flex-row justify-around"}>
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
