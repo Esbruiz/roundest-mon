@@ -7,7 +7,7 @@ import { getOptionsForVote } from "../utils/getRandomPokemon";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Loading from "../utils/circles.svg"
+import Loading from "../utils/circles.svg";
 
 const Home: NextPage = () => {
   const [ids, setIds] = React.useState(() => getOptionsForVote());
@@ -37,12 +37,14 @@ const Home: NextPage = () => {
           </div>
           <div className={"flex flex-row justify-around pt-16 w-1/2"}>
             {firstPokemon.isLoading && secondPokemon.isLoading && (
-              <Image className={"pt-16"} src={Loading} alt="Loading" width={256} height={256} />
+              <Image loading={"eager"}
+                     className={"pt-16"} src={Loading} alt="Loading" width={256} height={256} />
             )}
             {!firstPokemon.isLoading && firstPokemon.data && !secondPokemon.isLoading && secondPokemon.data && (
               <>
                 <PokemonListing pokemon={firstPokemon.data} vote={() => voteForRoundest(first, second)} />
                 <Image
+                  loading={"eager"}
                   width={64}
                   height={64}
                   style={{
@@ -69,6 +71,7 @@ type PokemonFromServer = RouterOutputs["roundest"]["getPokemonById"];
 const PokemonListing: React.FC<{ pokemon: PokemonFromServer, vote: () => void }> = ({ pokemon, vote }) => {
   return <div>
     <Image
+      loading={"eager"}
       width={256}
       height={256}
       style={{
@@ -76,7 +79,6 @@ const PokemonListing: React.FC<{ pokemon: PokemonFromServer, vote: () => void }>
       }}
       src={`/sprites/${pokemon.id}.png`}
       alt={pokemon.name}
-      layout={"fixed"}
     />
     <div className="flex flex-col items-center justify-center">
       <p className="text-lg capitalize text-center">{pokemon.name}</p>
