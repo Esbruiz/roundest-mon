@@ -13,5 +13,21 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'comicvine.gamespot.com',
+        port: '',
+        pathname: '/a/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        port: '',
+        pathname: '/PokeAPI/sprites/**',
+      },
+    ],
+  }
 };
 export default config;

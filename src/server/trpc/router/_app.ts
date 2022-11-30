@@ -1,8 +1,8 @@
 import { router } from "../trpc";
-import { exampleRouter } from "./example";
+import { roundestRouter } from "./roundest";
 
 export const appRouter = router({
-  example: exampleRouter,
+  roundest: roundestRouter
 });
 
 // export type definition of API
